@@ -9,8 +9,7 @@ use app\assets\TurntableAsset;
 TurntableAsset::register($this);
 ?>
     <div class="ga-turntable-bg">
-
-        <div class="ga-turntable"  >
+        <div class="ga-turntable" >
             <div class="ga-pointer" id="test" style=" -moz-transform: none ;-webkit-transform: none ;-o-transform: none ;-ms-transform: none ;">
             </div>
         </div>
