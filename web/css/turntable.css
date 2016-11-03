@@ -7,7 +7,6 @@
 */
 .ga-turntable-bg {
   max-width: 650px;
-  background: url(/image/turntable-bg.jpg) no-repeat center;
   width:100%;
   height: 600px;
   overflow: hidden;/*防止子元素的margin-top影响父元素*/
@@ -25,7 +24,6 @@
 
 .ga-turntable{
   max-width: 450px;
-  background: url(/image/turntable.png) no-repeat center;
   width: 100%;
   height: 75%;
   margin-left: auto;
@@ -37,11 +35,10 @@
 }
 
 .ga-pointer{
-  max-width: 228px;
-  background: url(/image/pointer.png) no-repeat center;
+  max-width: 174px;
   background-size: 100% 100%;
-  width: 50.67%;
-  height: 50.67%;
+  width: 38.67%;
+  height: 59.56%;
   margin: auto;
   -moz-transform: none;
   -webkit-transform: none;

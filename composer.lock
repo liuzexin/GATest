@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c7937831cbd10e9bba4e9af08128900a",
-    "content-hash": "5438861ad666f7367e7d9ae0e539b7d0",
+    "hash": "7ed9957804c35030bfd6e5d73889877c",
+    "content-hash": "a70940c4083e1b6a85f3fbdcd226b885",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -298,6 +298,39 @@
                 "html"
             ],
             "time": "2016-07-16 12:58:58"
+        },
+        {
+            "name": "ga/turntable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liuzexin/GATurntable.git",
+                "reference": "c462c11e435feb69262cf2ee7d973a124980abbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/liuzexin/GATurntable/c462c11e435feb69262cf2ee7d973a124980abbb.zip",
+                "reference": "c462c11e435feb69262cf2ee7d973a124980abbb",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ga\\turntable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "null"
+            ],
+            "authors": [
+                {
+                    "name": "liuzexin",
+                    "email": "liuzexin_top@163.com"
+                }
+            ],
+            "description": "desc",
+            "time": "2016-11-03 02:14:07"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2987,7 +3020,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ga/turntable": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
