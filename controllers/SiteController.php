@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UploadModel;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -50,6 +51,9 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'dropzone' => [
+                'class' => 'app\models\DropzoneAction'
+            ]
         ];
     }
 
@@ -60,7 +64,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->renderPartial('he40');
+        $model = new UploadModel();
+        return $this->render('index',[
+            'model'=>$model
+        ]);
     }
 
     /**

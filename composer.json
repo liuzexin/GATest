@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "ga/turntable": "dev-master",
         "hyii2/yii2-avatar": "dev-master",
-        "bower-asset/dropzonejs": "^4.3"
+        "bower-asset/dropzonejs": "^4.3",
+        "phpunit/phpunit": "5.6.*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

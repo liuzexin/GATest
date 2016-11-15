@@ -9,7 +9,7 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 class DropzoneAsset extends AssetBundle{
-    public $sourcePath = YII_DEBUG?'@bower/dist/':'@bower/dist/min';
+    public $sourcePath = YII_DEBUG?'@bower/dropzonejs/dist/':'@bower/dropzonejs/dist/min';
 
     public $js = YII_DEBUG?[
         'dropzone.js',
@@ -25,5 +25,10 @@ class DropzoneAsset extends AssetBundle{
     ]:[
         'dropzone.min.css',
         'basic.min.css'
+    ];
+
+    public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }
