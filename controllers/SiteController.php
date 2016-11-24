@@ -12,31 +12,7 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * @inheritdoc
@@ -51,9 +27,9 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
-            'dropzone' => [
-                'class' => 'app\models\DropzoneAction'
-            ]
+//            'dropzone' => [
+//                'class' => 'app\models\DropzoneAction'
+//            ]
         ];
     }
 
@@ -64,10 +40,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = new UploadModel();
-        return $this->render('index',[
-            'model'=>$model
-        ]);
+        $id = Yii::$app->request->post();
+        error_log(var_export($id,true),3,'/tmp/id.log');
+        echo 1;
+        var_dump($id);
     }
 
     /**
@@ -127,6 +103,28 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $id = Yii::$app->request->post();
+        error_log(var_export($id,true),3,'/tmp/id.log');
+        echo 1;
+        var_dump($id);
+    }
+
+    public function actionDropzone(){
+        $fileName = 'file';
+        $uploadPath = '@runtime/image';
+        error_log(var_export(1,true),3,'/tmp/error.log');
+        error_log(var_export($_FILES,true),3,'/tmp/error.log');
+        if (isset($_FILES[$fileName])) {
+            $file = UploadedFile::getInstanceByName($fileName);
+
+
+            if ($file->saveAs($uploadPath . '/' . $file->name)) {
+                //Now save file data to database
+                fputs();
+                echo 'success';
+            }
+        }else{
+            echo 'false';
+        }
     }
 }

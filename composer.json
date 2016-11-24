@@ -21,7 +21,11 @@
         "ga/turntable": "dev-master",
         "hyii2/yii2-avatar": "dev-master",
         "bower-asset/dropzonejs": "^4.3",
-        "phpunit/phpunit": "5.6.*"
+        "phpunit/phpunit": "5.6.*",
+        "devgroup/yii2-dropzone": "dev-master",
+        "resque/yii2-resque": "dev-master",
+        "yiisoft/yii2-redis": "^2.0",
+        "chrisboulton/php-resque": "1.2.x"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

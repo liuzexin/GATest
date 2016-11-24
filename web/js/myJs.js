@@ -1,13 +1,8 @@
 /**
  * Created by xin on 16/11/15.
  */
-Dropzone.options.myAwesomeDropzone = {
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
-    accept: function(file, done) {
-        if (file.name == "justinbieber.jpg") {
-            done("Naha, you don't.");
-        }
-        else { done(); }
-    }
-};
+//jQuery(document).ready(function () {
+//    Dropzone.autoDiscover = false;
+//    dropzone_w0 = new Dropzone("#my", {"url":"../site/dropzone","paramName":"file","params":{"_csrf":"<?=\Yii::$app->request->getCsrfToken()?>"}});
+//    jQuery('#w0').sortable([]);
+//});

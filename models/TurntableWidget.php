@@ -41,12 +41,12 @@ class TurntableWidget extends Widget{
         $js[] = "$('.ga-turntable').css('background','url($this->turntableImagePath) no-repeat center');";
         $js[] = "$(document).ready(function(){";
         $js[] = "$('.ga-pointer').click(function(){";
-        if($this->scrollType == self::TURNTABLE_SCROLL){
-            $callback = $this->turntableCallback?$this->turntableCallback:'null';
+        if ($this->scrollType == self::TURNTABLE_SCROLL) {
+            $callback = $this->turntableCallback ? $this->turntableCallback : 'null';
             $js[] = "$('.ga-turntable').animateRotate($this->deg,$this->animateTime,'swing',$callback);";
             $js[] = "$('.ga-pointer').animateRotate(-$this->deg,$this->animateTime,'swing');";
-        }else{
-            $callback = $this->pointerCallback?$this->pointerCallback:'null';
+        } else {
+            $callback = $this->pointerCallback ? $this->pointerCallback : 'null';
             $js[] = "$('.ga-pointer').animateRotate($this->deg,$this->animateTime,'swing',$callback);";
         }
 

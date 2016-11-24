@@ -7,6 +7,7 @@
  */
 namespace app\models;
 use yii\base\Model;
+use yii\web\UploadedFile;
 
 class UploadModel extends Model{
 
@@ -24,6 +25,7 @@ class UploadModel extends Model{
 
     public function upload(){
         if ($this->validate()) {
+
             $this->files->saveAs('@runtime/image/' . $this->files->baseName . '.' . $this->files->extension);
             return true;
         } else {

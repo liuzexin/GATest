@@ -5,6 +5,4 @@
 $this->title = 'My Yii Application';
 
 ?>
-<?= app\models\DropzoneWidget::widget(
-    ['params'=>$model]
-)?>
+<?= app\models\DropzoneWidget::widget()?>

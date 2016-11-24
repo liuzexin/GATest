@@ -21,8 +21,17 @@ class b extends A{
         $this->a =2;
 
     }
+
+    public function getError(){
+        if(error_get_last()){
+            print_r(error_get_last());
+        }
+        die('stop');
+    }
 }
 
-$b = new b();
+register_shutdown_function([new b(), 'getError']);
 
-echo $b->a;
+
+
+

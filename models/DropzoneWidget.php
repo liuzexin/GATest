@@ -19,9 +19,7 @@ class DropzoneWidget extends Widget
 
     public function run()
     {
-        return $this->render('dropzone',[
-            'model'=>$this->params
-        ]);
+        return $this->render('dropzone');
     }
 
     public function getViewPath()

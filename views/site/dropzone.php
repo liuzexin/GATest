@@ -1,21 +1,23 @@
 <?php
 
-use app\assets\DropzoneAsset;
-
-DropzoneAsset::register($this);
+use app\assets\UploadAsset;
+UploadAsset::register($this);
+use devgroup\dropzone\DropZone;
 ?>
-<?= \yii\widgets\ActiveForm::widget()?>
-<?php $form = \yii\widgets\ActiveForm::begin([
-    'options'=>[
-        'class'=>'dropzone'
-    ],
-    'action'=>\yii\helpers\Url::to(['site/dropzone']),
-    'id'=> 'my-awesome-dropzone'
-])
-?>
+    <div id="my">
 
-<?=$form->field($model, 'files')->fileInput()?>
+    </div>
 
-<?=\yii\widgets\ActiveForm::end()?>
-<!--<form action="/file-upload" class="dropzone" id="my-awesome-dropzone">-->
-<!--</form>-->
+<?php
+echo DropZone::widget(
+    [
+        'name' => 'file', // input name or 'model' and 'attribute'
+        'url' => '', // upload url
+        'storedFiles' => [], // stores files
+        'eventHandlers' => [], // dropzone event handlers
+        'sortable' => true, // sortable flag
+        'sortableOptions' => [], // sortable options
+        'htmlOptions' => [], // container html options
+        'options' => [], // dropzone js options
+    ]
+);

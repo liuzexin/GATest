@@ -73,6 +73,14 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+<script>
+    var dropz = new Dropzone("#my", {
+        url: "handle-upload.php",
+        maxFiles: 10,
+        maxFilesize: 512,
+        acceptedFiles: ".js,.obj,.dae"
+    });
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>
