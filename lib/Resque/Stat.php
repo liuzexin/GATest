@@ -7,7 +7,7 @@
  * @license		http://www.opensource.org/licenses/mit-license.php
  */
 namespace app\lib;
-use app\lib\Resque;
+
 class Resque_Stat
 {
 	/**

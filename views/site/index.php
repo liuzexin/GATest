@@ -1,8 +1,6 @@
 <?php
-
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
-
+use ga\turntable\TurntableWidget;
+use ga\turntable\TurntableAsset;
+TurntableAsset::register($this);
 ?>
-<?= app\models\DropzoneWidget::widget()?>
+<?= TurntableWidget::widget(['scrollType'=>TurntableWidget::TURNTABLE_SCROLL])?>

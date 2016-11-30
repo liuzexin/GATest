@@ -3,10 +3,11 @@
 
 
 namespace app\lib;
-use app\lib;
+use InvalidArgumentException;
 require_once dirname(__FILE__) . '/Job/Status.php';
 require_once dirname(__FILE__) . '/Job/DontPerform.php';
 require_once dirname(__FILE__) . '/Event.php';
+require_once dirname(__FILE__) . '/Failure/Interface.php';
 /**
  * Resque job.
  *

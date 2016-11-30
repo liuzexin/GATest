@@ -1,4 +1,6 @@
 <?php
+namespace app\lib;
+use Exception;
 require_once dirname(__FILE__) . '/Failure/Interface.php';
 
 /**

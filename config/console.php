@@ -21,11 +21,10 @@ $config = [
             ],
         ],
         'resque' => [
-            'class' => '\resque\RResque',
+            'class' => 'ga\resque\GAResque',
             'server' => '127.0.0.1',     // Redis server address
             'port' => '6379',            // Redis server port
             'database' => 0,             // Redis database number
-            'password' => '',            // Redis password auth, set to '' or null when no auth needed
         ],
         'db' => $db,
     ],

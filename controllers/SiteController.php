@@ -40,10 +40,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $id = Yii::$app->request->post();
-        error_log(var_export($id,true),3,'/tmp/id.log');
-        echo 1;
-        var_dump($id);
+        return $this->render('index');
     }
 
     /**

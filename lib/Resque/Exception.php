@@ -7,7 +7,7 @@
  * @license		http://www.opensource.org/licenses/mit-license.php
  */
 namespace app\lib;
-use yii\base\Exception;
+use Exception;
 class Resque_Exception extends Exception
 {
 }

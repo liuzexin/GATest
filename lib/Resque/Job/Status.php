@@ -7,7 +7,7 @@
  * @license		http://www.opensource.org/licenses/mit-license.php
  */
 namespace app\lib;
-use app\lib\Rsque;
+
 class Resque_Job_Status
 {
 	const STATUS_WAITING = 1;

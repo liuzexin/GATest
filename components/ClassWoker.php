@@ -9,8 +9,6 @@ class ClassWorker
 
     public function perform()
     {
-
-        echo "Hello World";
         # Run task
     }
 

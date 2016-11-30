@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3849049114d9fff1f6c7c43237c5522",
-    "content-hash": "e5b24cabf6f7c2139e3c0b07adc2c309",
+    "hash": "cbae9aec77985145233a13bbc7a6ceee",
+    "content-hash": "e67ce5c9ba36b3c17a686c8ec9567ddd",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -532,17 +532,53 @@
             "time": "2016-07-16 12:58:58"
         },
         {
+            "name": "ga/resque",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liuzexin/GAResque.git",
+                "reference": "b3a40e419bf51b2dc40ec893c118d8db324bf14a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/liuzexin/GAResque/b3a40e419bf51b2dc40ec893c118d8db324bf14a.zip",
+                "reference": "b3a40e419bf51b2dc40ec893c118d8db324bf14a",
+                "shasum": ""
+            },
+            "require": {
+                "chrisboulton/php-resque": "1.2.x"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ga\\resque\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "null"
+            ],
+            "authors": [
+                {
+                    "name": "liuzexin",
+                    "email": "liuzexin_top@163.com"
+                }
+            ],
+            "description": "desc",
+            "time": "2016-11-24 10:19:39"
+        },
+        {
             "name": "ga/turntable",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liuzexin/GATurntable.git",
-                "reference": "c462c11e435feb69262cf2ee7d973a124980abbb"
+                "reference": "33c7407fadbf16df2f873c0fed4ae3079337cf6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/liuzexin/GATurntable/c462c11e435feb69262cf2ee7d973a124980abbb.zip",
-                "reference": "c462c11e435feb69262cf2ee7d973a124980abbb",
+                "url": "https://packagist.phpcomposer.com/files/liuzexin/GATurntable/33c7407fadbf16df2f873c0fed4ae3079337cf6a.zip",
+                "reference": "33c7407fadbf16df2f873c0fed4ae3079337cf6a",
                 "shasum": ""
             },
             "type": "library",
@@ -561,8 +597,13 @@
                     "email": "liuzexin_top@163.com"
                 }
             ],
-            "description": "desc",
-            "time": "2016-11-03 02:14:07"
+            "description": "yii2-turntable",
+            "keywords": [
+                "turntable",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-11-29 07:05:52"
         },
         {
             "name": "hyii2/yii2-avatar",
@@ -3374,10 +3415,11 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "ga/turntable": 20,
         "hyii2/yii2-avatar": 20,
         "devgroup/yii2-dropzone": 20,
-        "resque/yii2-resque": 20
+        "resque/yii2-resque": 20,
+        "ga/resque": 20,
+        "ga/turntable": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

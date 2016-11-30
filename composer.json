@@ -18,14 +18,14 @@
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "ga/turntable": "dev-master",
         "hyii2/yii2-avatar": "dev-master",
         "bower-asset/dropzonejs": "^4.3",
         "phpunit/phpunit": "5.6.*",
         "devgroup/yii2-dropzone": "dev-master",
         "resque/yii2-resque": "dev-master",
         "yiisoft/yii2-redis": "^2.0",
-        "chrisboulton/php-resque": "1.2.x"
+        "ga/resque": "dev-master",
+        "ga/turntable": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
