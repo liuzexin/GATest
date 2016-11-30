@@ -2,10 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: xin
- * Date: 16/11/11
- * Time: 下午5:13
+ * Date: 16/11/30
+ * Time: 下午6:31
  */
-
 class SocketException extends Exception{
 
     public function __construct($message, $code = 0, Exception $previous = null)
@@ -168,7 +167,7 @@ class SocketServer extends SocketConnection{
 
                 if(in_array($client, $read)) {
                     if (false === ($data = @socket_read($client, 2048, PHP_NORMAL_READ))) {
-                        socket_close($client);
+                        socket_shutdown($client);
                         unset($this->clients[$key]);
                     }
                     if (empty($data = trim($data))) {
@@ -223,7 +222,7 @@ class SocketClient extends SocketConnection{
                     break;
                 }
             }else{
-               $allData .= $data;
+                $allData .= $data;
             }
         }
         $this->stop();
@@ -239,16 +238,10 @@ class SocketClient extends SocketConnection{
 }
 
 
-$soc = new SocketServer([
-    'sync' => true
-]);
-$soc->callback = function ($data, $socket) use($soc){
-
-    $soc->send($socket,'我日你大爷');
-    echo 'server receive:' . $data ."\n";
-};
-$soc->start();
 
 $soc = new SocketClient();
-
-
+$soc->callback = function($data, $socket) use ($soc){
+    echo 'Client receive:' . $data ."\n";
+    $soc->send($socket, "我去你大爷");
+};
+$soc->start();
