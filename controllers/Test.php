@@ -16,7 +16,7 @@ class SocketException extends Exception{
 abstract class SocketConnection{
 
     public $ip = '127.0.0.1';
-    public $port = '20003';
+    public $port = '20000';
 
     public $callback;
 
@@ -25,21 +25,18 @@ abstract class SocketConnection{
     public $protocol = SOL_TCP;
 
 
-    public $sendTimeOut = 1;
-    public $recTimeOut = 1;
+    public $sendTimeOut = 2;
+    public $recTimeOut = 2;
 
     protected static $socket;
 
     abstract public function start();
 
+    abstract public function send($socket, $data);
+
     public function stop()
     {
         socket_close($this->getSocket());
-    }
-
-    public function send($socket, $data)
-    {
-        return socket_write($socket, $data, strlen($data));
     }
 
     public function __construct($cof_arr = null)
@@ -90,6 +87,10 @@ class SocketServer extends SocketConnection{
         parent::__construct($cof_arr);
     }
 
+    public function send($socket, $data)
+    {
+        return socket_write($socket, $data, strlen($data));
+    }
 
     public function start()
     {
@@ -134,8 +135,10 @@ class SocketServer extends SocketConnection{
                     break 2;
                 }
 
-                $func = $this->callback;
-                $func($data, $newSocket);
+                if(!empty($this->callback)){
+                    $func = $this->callback;
+                    $func($data, $newSocket);
+                }
 
             } while (true);
 
@@ -183,8 +186,10 @@ class SocketServer extends SocketConnection{
                         break 2;
                     }
                     else{
-                        $func = $this->callback;
-                        $func($data, $client);
+                        if(!empty($this->callback)){
+                            $func = $this->callback;
+                            $func($data, $client);
+                        }
                     }
                 }
             }
@@ -196,36 +201,46 @@ class SocketServer extends SocketConnection{
 
         $this->stop();
     }
+
 }
 
 
 class SocketClient extends SocketConnection{
 
     public $sync = false;
+    public $sendData = '';
 
     public function start()
     {
-        $this->updateSocketOpt();
         if(false === socket_connect($this->getSocket(), $this->ip, $this->port)){
-            throw new SocketException('Can\'t connect the server:' . $this->getError());
+            if($this->getError() != SOCKET_EINPROGRESS && $this->getError() != SOCKET_EWOULDBLOCK){
+                throw new SocketException('Can\'t connect the server:' . $this->getError());
+            }
         }
 
         $allData = null;
+
+        $this->send($this->getSocket(), $this->sendData);
         while(true){
-            $data = socket_read($this->getSocket(),2048, PHP_NORMAL_READ);
+
+            $data = socket_read($this->getSocket(),2048);
             if($data === false){
-                throw new SocketException('Connection terminated unexpectedly:' . $this->getError());
+                if($this->getError() != 11 && $this->getError() != 115) {
+                    throw new SocketException('Connection terminated unexpectedly:' . $this->getError());
+                }
             }
             if($data == ''){
-                if(!empty($this->callback)){
-                    $func = $this->callback;
-                    $func($data, $this->getSocket());
-                    break;
-                }
+                break;
             }else{
                $allData .= $data;
             }
+            if(!empty($this->callback)){
+                $func = $this->callback;
+                $func($data, $this->getSocket());
+            }
         }
+
+
         $this->stop();
         return $allData;
     }
@@ -236,19 +251,30 @@ class SocketClient extends SocketConnection{
         parent::updateSocketOpt();
         $this->sync?null:socket_set_nonblock($this->getSocket());
     }
+
+    public function send($socket, $data)
+    {
+        return socket_write($socket, $data, strlen($data));
+    }
+
+    protected function getError()
+    {
+        $err = socket_last_error($this->getSocket()) ;
+        if($err != SOCKET_EWOULDBLOCK  && $err != SOCKET_EINPROGRESS){
+            return parent::getError();
+        }
+        return $err;
+    }
 }
 
 
-$soc = new SocketServer([
-    'sync' => true
-]);
-$soc->callback = function ($data, $socket) use($soc){
 
-    $soc->send($socket,'我日你大爷');
-    echo 'server receive:' . $data ."\n";
+
+$soc = new SocketClient([
+
+]);
+$soc->sendData = '1231231231' . "\n";
+$soc->callback = function($data, $socket) use ($soc){
+    echo 'Client receive:' . $data ."\n";
 };
 $soc->start();
-
-$soc = new SocketClient();
-
-

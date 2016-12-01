@@ -15,7 +15,7 @@ class SocketException extends Exception{
 abstract class SocketConnection{
 
     public $ip = '127.0.0.1';
-    public $port = '20003';
+    public $port = '20000';
 
     public $callback;
 
@@ -31,14 +31,11 @@ abstract class SocketConnection{
 
     abstract public function start();
 
+    abstract public function send($socket, $data);
+
     public function stop()
     {
         socket_close($this->getSocket());
-    }
-
-    public function send($socket, $data)
-    {
-        return socket_write($socket, $data, strlen($data));
     }
 
     public function __construct($cof_arr = null)
@@ -89,6 +86,10 @@ class SocketServer extends SocketConnection{
         parent::__construct($cof_arr);
     }
 
+    public function send($socket, $data)
+    {
+        return socket_write($socket, $data, strlen($data));
+    }
 
     public function start()
     {
@@ -167,7 +168,7 @@ class SocketServer extends SocketConnection{
 
                 if(in_array($client, $read)) {
                     if (false === ($data = @socket_read($client, 2048, PHP_NORMAL_READ))) {
-                        socket_shutdown($client);
+                        socket_close($client);
                         unset($this->clients[$key]);
                     }
                     if (empty($data = trim($data))) {
@@ -195,12 +196,14 @@ class SocketServer extends SocketConnection{
 
         $this->stop();
     }
+
 }
 
 
 class SocketClient extends SocketConnection{
 
     public $sync = false;
+    public $sendData = '';
 
     public function start()
     {
@@ -211,8 +214,8 @@ class SocketClient extends SocketConnection{
 
         $allData = null;
         while(true){
-            $data = socket_read($this->getSocket(),2048, PHP_NORMAL_READ);
-            if($data === false){
+            socket_recv($this->getSocket(),$data, 2048);
+            if($data === NULL){
                 throw new SocketException('Connection terminated unexpectedly:' . $this->getError());
             }
             if($data == ''){
@@ -235,13 +238,20 @@ class SocketClient extends SocketConnection{
         parent::updateSocketOpt();
         $this->sync?null:socket_set_nonblock($this->getSocket());
     }
+
+    public function send($socket, $data)
+    {
+        return socket_send($socket, $data, strlen($data), MSG_OOB);
+    }
 }
 
 
+$soc = new SocketServer([
+    'singleModel' =>true
+]);
+$soc->callback = function ($data, $socket) use($soc){
 
-$soc = new SocketClient();
-$soc->callback = function($data, $socket) use ($soc){
-    echo 'Client receive:' . $data ."\n";
-    $soc->send($socket, "我去你大爷");
+    echo 'server receive:' . $data ."\n";
+    $soc->send($socket, 'adadasdasdasdadadas'."\n\r");
 };
 $soc->start();

@@ -10,75 +10,47 @@ namespace app\components;
 
 class SocketServer extends SocketConnection{
 
-    public $ip = '127.0.0.1';
-    public $port = '20000';
-
-    public $domain = AF_INET;// Internet Protocol,default use IP4 protocol.
-    public $type = SOCK_STREAM;
-    public $protocol = SOL_TCP;
-    public $callback;//block
-
-    public $sendTimeOut = 1;
-    public $recTimeOut = 1;
-
-    private static $socket;
+    public $singleMode = false;
 
 
+    private $clients = [];
+    public $maxClient = 10;
 
-    public function __get($name)
+    public function __construct($cof_arr = null)
     {
-        if($name == 'socket'){
-            return $this->getSocket();
-        }else if(!isset($this->$name)){
-            throw new SocketException('Get unknown property');
-        }else if($name == 'callback'){
-          return $this->$name();
-        }else{
-            return $this->$name;
-        }
+        parent::__construct($cof_arr);
     }
 
-    public function __set($name, $value)
+    public function send($socket, $data)
     {
-        if(isset($this->$name) && $name != 'socket'){
-            $this->$name = $value;
-        }else{
-            throw new SocketException('Set unknown property');
-        }
+        return socket_write($socket, $data, strlen($data));
     }
 
-    public function getSocket(){
-
-        if(self::$socket == null){
-            if(!self::$socket = socket_create($this->domain, $this->type, $this->protocol)){
-
-                throw new SocketException('Create socket resource fail:' . socket_strerror($this->socket));
-            };
-        }
-        return self::$socket;
-    }
-
-    protected function updateSocketOpt(){
-        socket_set_option($this->socket, SOL_SOCKET, SO_RCVTIMEO, ['sec'=>$this->recTimeOut, 'usec'=>0]);
-        socket_set_option($this->socket, SOL_SOCKET, SO_SNDTIMEO, ['sec'=>$this->sendTimeOut, 'usec'=>0]);
-    }
-
-    public function start(){
+    public function start()
+    {
         $this->updateSocketOpt();
 
-        if(!$res = socket_bind($this->socket,$this->ip, $this->port)){
+        if(!$res = socket_bind($this->getSocket(),$this->ip, $this->port)){
             throw new SocketException('Bind socket error:'. $this->getError() . "\n");
         }
-        if(!$res = socket_listen($this->socket, SOMAXCONN)){
+        if(!$res = socket_listen($this->getSocket(), SOMAXCONN)){
             throw new SocketException('Listen port error:'. $this->getError() . "\n");
         }
 
+        if($this->singleMode){
+            $this->singleRun();
+        }else{
+            $this->multiRun();
+        }
+    }
+
+    private function singleRun(){
         do {
 
-            if (empty($newSocket = @socket_accept($this->socket))) {
+            if (($newSocket = @socket_accept($this->getSocket())) === false) {
                 throw new SocketException('Accepts a connection on a socket error:' . $this->getError());
             }
-            $msg = "Start connection";
+            $msg = "Start connection.\n";
 
             $this->send($newSocket, $msg);
 
@@ -89,15 +61,19 @@ class SocketServer extends SocketConnection{
                 if (empty($data = trim($data))) {
                     continue;
                 }
-                if ($data == 'quit') {
+                elseif ($data == 'quit') {
                     break;
                 }
-                if ($data == 'shutdown') {
+                elseif ($data == 'shutdown') {
                     socket_close($newSocket);
                     break 2;
                 }
 
-                $this->$callback($data);
+                if(!empty($this->callback)){
+                    $func = $this->callback;
+                    $func($data, $newSocket);
+                }
+
             } while (true);
 
             socket_close($newSocket);
@@ -107,20 +83,57 @@ class SocketServer extends SocketConnection{
         $this->stop();
     }
 
-    public function stop()
-    {
-        socket_close($this->socket);
+    private function multiRun(){
+
+        $read[] = $this->getSocket();
+        do {
+            $num_changed = socket_select($read, $NULL, $NULL, 0, 10);
+            if($num_changed) {
+
+
+                if (in_array($this->getSocket(), $read)) {
+
+                    if (count($this->clients) < $this->maxClient) {
+
+                        $this->clients[] = socket_accept($this->getSocket());
+                    }
+
+                }
+            }
+
+            foreach($this->clients as $key => $client) {
+
+                if(in_array($client, $read)) {
+                    if (false === ($data = @socket_read($client, 2048, PHP_NORMAL_READ))) {
+                        socket_close($client);
+                        unset($this->clients[$key]);
+                    }
+                    if (empty($data = trim($data))) {
+                        continue;
+                    }
+                    elseif ($data == 'quit') {
+                        socket_close($client);
+                        unset($this->clients[$key]);
+                        break;
+                    }
+                    elseif ($data == 'shutdown') {
+                        break 2;
+                    }
+                    else{
+                        if(!empty($this->callback)){
+                            $func = $this->callback;
+                            $func($data, $client);
+                        }
+                    }
+                }
+            }
+
+            $read = $this->clients;
+            $read[] = $this->getSocket();
+
+        } while (true);
+
+        $this->stop();
     }
 
-    protected function getError()
-    {
-        return socket_strerror(socket_last_error($this->socket));
-    }
-
-    public function send($socket, $data)
-    {
-        return socket_write($socket, $data, strlen($data));
-    }
 }
-
-

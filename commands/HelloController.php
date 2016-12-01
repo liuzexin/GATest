@@ -6,6 +6,7 @@
  */
 
 namespace app\commands;
+use app\components\SocketClient;
 use Yii;
 use yii\console\Controller;
 
@@ -25,8 +26,7 @@ class HelloController extends Controller
      */
     public function actionIndex($message = 'hello world')
     {
-        echo $message . "\n";
-        Yii::$app->resque->createJob('queue_name', 'ClassWorker', $args = []);
+
     }
 
     public function actionQueue(){
