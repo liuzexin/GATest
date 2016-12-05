@@ -1,18 +1,44 @@
 <?php
-error_reporting(E_ALL);
-//端口111
-$service_port = 20000;
-//本地
-$address = 'localhost';
-//创建 TCP/IP socket
-$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+function async_get($ssl, $host, $port, $endpoint, $connectTimeout) {
+    $cookie_str = '';
 
-$result = socket_connect($socket, $address, $service_port);
-$out = '';
-$in = "sun\n";
-socket_write($socket, $in, strlen($in));
-$out = socket_read($socket, 2048);
-echo $out;
+    foreach ($_COOKIE as $k => $v) {
+        $cookie_str .= urlencode($k) .'='. urlencode($v) .'; ';
+    }
+    $sslstr = ($ssl) ? "ssl://" : "";
+    $request =  "GET $endpoint HTTP/1.1\r\n";
+    $request .= "Host: $host\r\n";
 
-socket_close($socket);
-?>
+    if (!empty($cookie_str)) {
+        $request .= 'Cookie: '. substr($cookie_str, 0, -2);
+    }
+//    $request .= "Connection: Close\r\n";
+
+    $errno = null;
+    $errstr = null;
+    $port = $port;
+    if (($fp = @fsockopen($sslstr.$host, $port, $errno, $errstr, $connectTimeout)) == false) {
+        return;
+    }
+    echo fputs($fp,$request);
+//    echo fread($fp,2048);
+    fclose($fp);
+}
+
+function add($a){
+    echo $a + 1;
+}
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL, 'http://localhost:9999');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1000000000);
+
+var_dump(curl_exec($ch));
+curl_close($ch);
+
+
+add(3);
+add(4);
