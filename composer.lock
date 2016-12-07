@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "43c95035cc2a7b143d351218939fb2ec",
-    "content-hash": "997375c3c9312075ac084681974b5303",
+    "hash": "31b5df8468880e30a94be8ed83a5e715",
+    "content-hash": "67e01ca1f583900ffb6679b2d01e4bc6",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -537,16 +537,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liuzexin/GAResque.git",
-                "reference": "b3a40e419bf51b2dc40ec893c118d8db324bf14a"
+                "reference": "3b2bc15cd525bb2aa898af831702c21948fe43f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/liuzexin/GAResque/b3a40e419bf51b2dc40ec893c118d8db324bf14a.zip",
-                "reference": "b3a40e419bf51b2dc40ec893c118d8db324bf14a",
+                "url": "https://packagist.phpcomposer.com/files/liuzexin/GAResque/3b2bc15cd525bb2aa898af831702c21948fe43f2.zip",
+                "reference": "3b2bc15cd525bb2aa898af831702c21948fe43f2",
                 "shasum": ""
             },
             "require": {
-                "chrisboulton/php-resque": "1.2.x"
+                "chrisboulton/php-resque": "@dev"
             },
             "type": "library",
             "autoload": {
@@ -564,8 +564,14 @@
                     "email": "liuzexin_top@163.com"
                 }
             ],
-            "description": "desc",
-            "time": "2016-11-24 10:19:39"
+            "description": "yii2-resque",
+            "keywords": [
+                "ga",
+                "resque",
+                "yii2",
+                "yii2-resque"
+            ],
+            "time": "2016-12-07 05:50:51"
         },
         {
             "name": "ga/turntable",
@@ -3531,8 +3537,9 @@
         "hyii2/yii2-avatar": 20,
         "devgroup/yii2-dropzone": 20,
         "resque/yii2-resque": 20,
-        "ga/resque": 20,
-        "ga/turntable": 20
+        "ga/turntable": 20,
+        "chrisboulton/php-resque": 20,
+        "ga/resque": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

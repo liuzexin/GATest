@@ -24,9 +24,10 @@
         "devgroup/yii2-dropzone": "dev-master",
         "resque/yii2-resque": "dev-master",
         "yiisoft/yii2-redis": "^2.0",
-        "ga/resque": "dev-master",
         "ga/turntable": "dev-master",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "chrisboulton/php-resque": "@dev",
+        "ga/resque": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
