@@ -4,9 +4,32 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "31b5df8468880e30a94be8ed83a5e715",
-    "content-hash": "67e01ca1f583900ffb6679b2d01e4bc6",
+    "hash": "7545dd78dbfc427e4c6d980619e38fa7",
+    "content-hash": "fe87a851a25bbf0da1dfa340d8bf6a9c",
     "packages": [
+        {
+            "name": "bower-asset/angular",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/angular/bower-angular.git",
+                "reference": "2c9a5a213e66013a0930230448a4de0f471ff1f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/angular/bower-angular/zipball/2c9a5a213e66013a0930230448a4de0f471ff1f6",
+                "reference": "2c9a5a213e66013a0930230448a4de0f471ff1f6",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./angular.js",
+                "bower-asset-ignore": []
+            },
+            "license": [
+                "MIT"
+            ]
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -219,7 +242,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "https://github.com/bower-asset/punycode.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {

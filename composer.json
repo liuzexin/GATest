@@ -27,7 +27,8 @@
         "ga/turntable": "dev-master",
         "guzzlehttp/guzzle": "~6.0",
         "chrisboulton/php-resque": "@dev",
-        "ga/resque": "dev-master"
+        "ga/resque": "dev-master",
+        "bower-asset/angular": "^1.6"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
