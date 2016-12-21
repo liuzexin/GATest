@@ -10,6 +10,7 @@ namespace app\components;
 
 use yii\base\Action;
 use yii\base\Exception;
+use yii\web\Response;
 
 class CaptchaAction extends Action
 {
@@ -18,7 +19,7 @@ class CaptchaAction extends Action
 
     public $height = 70;
 
-    public $fontFile = './HansKendrickV-Regular.ttf';
+    public $fontFile = '@app/components/HansKendrickV-Regular.ttf';
 
     public $maxAngle = 15;
 
@@ -40,12 +41,13 @@ class CaptchaAction extends Action
 
     private $maxLine = 3;
 
-    public function beforeRun(){
+    protected function beforeRun(){
 
         parent::beforeRun();
         if(extension_loaded('gd') === false){
             throwException(new Exception("GA Library not found."));
         }
+        return true;
     }
 
     public function run(){
@@ -86,7 +88,7 @@ class CaptchaAction extends Action
             $angle = mt_rand($this->minAngle, $this->maxAngle);
             $x = $i * $width;
             $y = mt_rand(0, $this->height - imagefontheight($size));
-            imagettftext($image ,$size ,$angle, $x, $y , $this->randColor($image), $this->fontFile, substr($this->getRandomString(), $i, 1));
+            imagettftext($image ,$size ,$angle, $x, $y , $this->randColor($image), \Yii::getAlias($this->fontFile), substr($this->getRandomString(), $i, 1));
         }
     }
 
@@ -106,8 +108,7 @@ class CaptchaAction extends Action
         ob_start();
         imagepng($image);
         imagedestroy($image);
-        $buff = ob_get_clean();
-        return $buff;
+        return ob_get_clean();
     }
 
     protected function randColor($image){
@@ -129,10 +130,11 @@ class CaptchaAction extends Action
     public function changeHTTPHeader(){
 //        $header = \Yii::$app->response->getHeaders();
         \Yii::$app->getResponse()->getHeaders()
-            ->set('Pragma', 'public')
-            ->set('Expires', '0')
-            ->set('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
-            ->set('Content-Transfer-Encoding', 'binary')
+//            ->set('Pragma', 'public')
+//            ->set('Expires', '0')
+//            ->set('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
+//            ->set('Content-Transfer-Encoding', 'binary')
             ->set('Content-type', 'image/png');
+        \Yii::$app->response->format = Response::FORMAT_RAW;
     }
 }
