@@ -12,7 +12,7 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-
+//    private $status;
 
     /**
      * @inheritdoc
@@ -27,9 +27,9 @@ class SiteController extends Controller
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
-//            'dropzone' => [
-//                'class' => 'app\models\DropzoneAction'
-//            ]
+            'verify'=>[
+                'class' => 'app\components\CaptchaAction',
+            ]
         ];
     }
 
@@ -40,8 +40,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        error_log(var_export(Yii::$app->request),3,'/tmp/error_test.log');
-        return $this->render('index');
+//        error_log(var_export(Yii::$app->request),3,'/tmp/error_test.log');
+//        return $this->render('index');
+        echo mt_rand(-15, 15);
     }
 
     /**
@@ -124,5 +125,9 @@ class SiteController extends Controller
         }else{
             echo 'false';
         }
+    }
+
+    public function getStatus(){
+        return 1;
     }
 }
