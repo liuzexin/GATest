@@ -8,6 +8,7 @@
 
 namespace app\components;
 
+use Yii;
 use yii\base\Action;
 use yii\base\Exception;
 use yii\web\Response;
@@ -29,6 +30,8 @@ class CaptchaAction extends Action
      */
     public $maxChar = 6;
 
+    public $maxVerification = 4;
+
     public $maxFontSize = 25;
 
     public $minFontSize = 20;
@@ -45,6 +48,8 @@ class CaptchaAction extends Action
 
     public $marginTB = 6;
 
+    public $sessionKey = 'ga/Captcha';
+
     protected function beforeRun(){
 
         parent::beforeRun();
@@ -55,8 +60,24 @@ class CaptchaAction extends Action
     }
 
     public function run(){
+        $this->changeSession();
+        return $this->createImage();
+    }
+
+    public function changeSession(){
+
+        $session = Yii::$app->session;
+        $session->open();
+        $name = $this->sessionKey;
+        $session[$name] = $this->getRandomString();
+
+        return $session[$name];
+    }
+
+    public function createImage(){
 
         $this->changeHTTPHeader();
+
         $image = $this->getImageResource();
 
         $this->draw($image);
@@ -126,7 +147,7 @@ class CaptchaAction extends Action
         if(empty($this->randomString)){
             $chars = '123456789zxcvbnmasdfghjklqwertyuiopZXCVBNMASDFGHJKLQWERTYUIO';
             for ($i = 0; $i < $this->maxChar; $i++) {
-                $this->randomString .= substr($chars, mt_rand(0, 61), 1);
+                $this->randomString .= substr($chars, mt_rand(0, 59), 1);
             }
         }
         return $this->randomString;
@@ -140,5 +161,14 @@ class CaptchaAction extends Action
             ->set('Content-Transfer-Encoding', 'binary')
             ->set('Content-type', 'image/png');
         \Yii::$app->response->format = Response::FORMAT_RAW;
+    }
+
+    public function validate($value, $caseSensitive){
+        $session = Yii::$app->session;
+        if(!empty($session[$this->sessionKey . 'count']) && $session[$this->sessionKey . 'count'] > $this->maxVerification){
+            return false;
+        }
+        $session[$this->sessionKey . 'count'] += 1;
+        return $caseSensitive ? $value === $session->get($this->sessionKey) : strcasecmp($value , $session->get($this->sessionKey));
     }
 }

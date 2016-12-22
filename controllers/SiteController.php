@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\components\CaptchaValidator;
 
 class SiteController extends Controller
 {
@@ -42,7 +43,8 @@ class SiteController extends Controller
     {
 //        error_log(var_export(Yii::$app->request),3,'/tmp/error_test.log');
 //        return $this->render('index');
-        echo mt_rand(-15, 15);
+//        echo mt_rand(-15, 15);
+        return $this->render('captcha');
     }
 
     /**
@@ -129,5 +131,25 @@ class SiteController extends Controller
 
     public function getStatus(){
         return 1;
+    }
+
+    public function actionSess(){
+        var_dump(Yii::$app->session->get('ga/Captcha'));
+    }
+
+    public function actionTest(){
+
+        $res = Yii::$app->request->post('captcha');
+        $ca = new CaptchaValidator();
+
+        if($res == null){
+            return $this->render('captcha');
+        }
+
+        if($ca->validate($res)){
+            echo "success";
+        }else{
+            echo "fail";
+        }
     }
 }
