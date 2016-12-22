@@ -25,11 +25,14 @@ class CaptchaAction extends Action
     public $maxAngle = 10;
 
     public $minAngle = -10;
+
     /**
      * @var int If set more than six, it still is six.
      */
     public $maxChar = 6;
-
+    /**
+     * @var int If 0 not limit the verification.
+     */
     public $maxVerification = 4;
 
     public $maxFontSize = 25;
@@ -46,7 +49,7 @@ class CaptchaAction extends Action
 
     public $marginLR = 10;
 
-    public $marginTB = 6;
+    public $marginTB = 10;
 
     public $sessionKey = 'ga/Captcha';
 
@@ -165,7 +168,7 @@ class CaptchaAction extends Action
 
     public function validate($value, $caseSensitive){
         $session = Yii::$app->session;
-        if(!empty($session[$this->sessionKey . 'count']) && $session[$this->sessionKey . 'count'] > $this->maxVerification){
+        if(!empty($session[$this->sessionKey . 'count']) && ($this->maxVerification != 0) && ($session[$this->sessionKey . 'count'] > $this->maxVerification)){
             return false;
         }
         $session[$this->sessionKey . 'count'] += 1;
