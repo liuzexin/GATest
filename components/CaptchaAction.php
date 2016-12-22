@@ -15,23 +15,23 @@ use yii\web\Response;
 class CaptchaAction extends Action
 {
 
-    public $width = 120;
+    public $width = 140;
 
-    public $height = 70;
+    public $height = 50;
 
     public $fontFile = '@app/components/HansKendrickV-Regular.ttf';
 
-    public $maxAngle = 15;
+    public $maxAngle = 10;
 
-    public $minAngle = -15;
+    public $minAngle = -10;
     /**
      * @var int If set more than six, it still is six.
      */
     public $maxChar = 6;
 
-    public $maxFontSize = 20;
+    public $maxFontSize = 25;
 
-    public $minFontSize = 18;
+    public $minFontSize = 20;
 
     protected $randomString = '';
 
@@ -40,6 +40,10 @@ class CaptchaAction extends Action
     private $noisyPoints = 50;
 
     private $maxLine = 3;
+
+    public $marginLR = 10;
+
+    public $marginTB = 6;
 
     protected function beforeRun(){
 
@@ -81,14 +85,15 @@ class CaptchaAction extends Action
             $this->maxChar = 6;
         }
 
-        $width = $this->width / 6;
-
+        $width = ($this->width - 2 * $this->marginLR) / 6;
+        $height = ($this->height - 2 * $this->marginTB);
         for($i = 0; $i < $this->maxChar; $i++){
             $size = mt_rand($this->minFontSize, $this->maxFontSize);
             $angle = mt_rand($this->minAngle, $this->maxAngle);
-            $x = $i * $width;
-            $y = mt_rand(0, $this->height - imagefontheight($size));
-            imagettftext($image ,$size ,$angle, $x, $y , $this->randColor($image), \Yii::getAlias($this->fontFile), substr($this->getRandomString(), $i, 1));
+            $x = $i * $width + $this->marginLR;
+            $fontHeight = imagefontheight($size);
+            $y = mt_rand($fontHeight + $this->marginTB, $height - $fontHeight + $this->marginTB);
+            imagettftext($image ,$size ,$angle, $x, $y, $this->randColor($image), \Yii::getAlias($this->fontFile), substr($this->getRandomString(), $i, 1));
         }
     }
 
@@ -99,7 +104,7 @@ class CaptchaAction extends Action
         }
 
         for($i = 0; $i < $this->maxLine; $i++){
-            imagearc($this->getImageResource(), mt_rand(0, $this->width), mt_rand(0, $this->height), mt_rand(0, $this->width), mt_rand(0, $this->height), mt_rand($this->minAngle, $this->maxAngle), mt_rand($this->minAngle, $this->maxAngle), $this->randColor($this->getImageResource()));
+            imagearc($this->getImageResource(), mt_rand(0, $this->width), mt_rand(0, $this->height) , mt_rand(0, $this->width) / 2, mt_rand(0, $this->height) / 2, mt_rand($this->minAngle, $this->maxAngle), mt_rand($this->minAngle, $this->maxAngle), $this->randColor($this->getImageResource()));
         }
     }
 
@@ -128,12 +133,11 @@ class CaptchaAction extends Action
     }
 
     public function changeHTTPHeader(){
-//        $header = \Yii::$app->response->getHeaders();
         \Yii::$app->getResponse()->getHeaders()
-//            ->set('Pragma', 'public')
-//            ->set('Expires', '0')
-//            ->set('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
-//            ->set('Content-Transfer-Encoding', 'binary')
+            ->set('Pragma', 'public')
+            ->set('Expires', '0')
+            ->set('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
+            ->set('Content-Transfer-Encoding', 'binary')
             ->set('Content-type', 'image/png');
         \Yii::$app->response->format = Response::FORMAT_RAW;
     }
