@@ -31,9 +31,9 @@ class CaptchaAction extends Action
      */
     public $maxChar = 6;
     /**
-     * @var int If 0 not limit the verification.
+     * @var int If 0 not limit the number of verification.
      */
-    public $maxVerification = 4;
+    public $maxVerification = 0;
 
     public $maxFontSize = 25;
 
@@ -117,7 +117,7 @@ class CaptchaAction extends Action
             $x = $i * $width + $this->marginLR;
             $fontHeight = imagefontheight($size);
             $y = mt_rand($fontHeight + $this->marginTB, $height - $fontHeight + $this->marginTB);
-            imagettftext($image ,$size ,$angle, $x, $y, $this->randColor($image), \Yii::getAlias($this->fontFile), substr($this->getRandomString(), $i, 1));
+            imagettftext($image ,$size ,$angle, $x, $y, $this->randColor($image), Yii::getAlias($this->fontFile), substr($this->getRandomString(), $i, 1));
         }
     }
 
@@ -157,13 +157,13 @@ class CaptchaAction extends Action
     }
 
     public function changeHTTPHeader(){
-        \Yii::$app->getResponse()->getHeaders()
+        Yii::$app->getResponse()->getHeaders()
             ->set('Pragma', 'public')
             ->set('Expires', '0')
             ->set('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
             ->set('Content-Transfer-Encoding', 'binary')
             ->set('Content-type', 'image/png');
-        \Yii::$app->response->format = Response::FORMAT_RAW;
+        Yii::$app->response->format = Response::FORMAT_RAW;
     }
 
     public function validate($value, $caseSensitive){

@@ -34,8 +34,7 @@ class CaptchaValidator extends Validator{
     public function validateValue($value){
 
         $ca = $this->createCaptchaAction();
-        //TODO:修改
-        return $ca->validate($value, $this->caseSensitive) === true ? null : $this->message;
+        return $ca->validate($value, $this->caseSensitive) === true ? null : [$this->message ,[]];
     }
 
     public function createCaptchaAction(){

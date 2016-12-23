@@ -19,7 +19,13 @@ class Captcha extends InputWidget{
 
     public $imageOptions;
 
+    private $imageID = 'ga-captcha';
+
     public function run(){
+
+        $this->reloadID();
+
+        $this->registerJS();
 
         if ($this->hasModel()) {
             $input = Html::activeTextInput($this->model, $this->attribute, $this->options);
@@ -33,5 +39,30 @@ class Captcha extends InputWidget{
             '{input}' => $input,
             '{image}' => $image,
         ]);
+    }
+
+    protected function reloadID(){
+
+        if(empty($this->imageOptions)){
+            $this->imageOptions['id'] = $this->imageID;
+        }else{
+            $this->imageID =  $this->imageOptions['id'];
+        }
+
+    }
+
+    protected function registerJS(){
+        $js = <<<JS
+        jQuery(window).ready(function(){
+            var dom = jQuery('#$this->imageID');
+            var id = 1;
+            dom.click(function(){
+                dom.attr('src', '/site/verify' + '?id=' + id);
+                id++;
+            });
+        });
+JS;
+        $this->getView()->registerJs($js);
+        return $js;
     }
 }
