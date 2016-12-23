@@ -6,10 +6,11 @@
  * Time: 下午3:38
  */
 $this->title = '测试';
+use app\models\CaptchaWidget;
 use yii\helpers\Html;
 ?>
 <?= Html::beginForm('site/test', 'post')?>
-<?= \app\models\Captcha::widget([
+<?= CaptchaWidget::widget([
     'name' => 'captcha',
     'template' => '<label for="captcha">验证码</label>&emsp;&emsp;{input}{image}',
     'options' => ['id' => 'captcha'],

@@ -29,7 +29,7 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
             'verify'=>[
-                'class' => 'app\components\CaptchaAction',
+                'class' => 'ga\captcha\CaptchaAction',
             ]
         ];
     }

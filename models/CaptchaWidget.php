@@ -8,10 +8,10 @@
 
 namespace app\models;
 use yii\widgets\InputWidget;
-use app\assets\CaptchaAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
-class Captcha extends InputWidget{
+class CaptchaWidget extends InputWidget{
 
     public $captchaAction = 'site/verify';
 
@@ -32,7 +32,7 @@ class Captcha extends InputWidget{
         } else {
             $input = Html::textInput($this->name, $this->value, $this->options);
         }
-        $route = $this->captchaAction;
+        $route = Url::toRoute($this->captchaAction);
 
         $image = Html::img($route, $this->imageOptions);
         echo strtr($this->template, [
