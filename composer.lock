@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7545dd78dbfc427e4c6d980619e38fa7",
-    "content-hash": "fe87a851a25bbf0da1dfa340d8bf6a9c",
+    "hash": "77fcbd6ea2bbbb60f27f8593b3179b37",
+    "content-hash": "27a65017fe9ff47128d421c4d3385558",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -555,17 +555,59 @@
             "time": "2016-07-16 12:58:58"
         },
         {
+            "name": "ga/captcha",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liuzexin/GACaptcha.git",
+                "reference": "bab6378f35be3a1b0b7572af39f617f4e903a222"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/liuzexin/GACaptcha/bab6378f35be3a1b0b7572af39f617f4e903a222.zip",
+                "reference": "bab6378f35be3a1b0b7572af39f617f4e903a222",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable | 1.12.*@stable"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ga\\captcha\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "null"
+            ],
+            "authors": [
+                {
+                    "name": "liuzexin",
+                    "email": "liuzexin_top@163.com"
+                }
+            ],
+            "description": "yii2-captcha",
+            "keywords": [
+                "captcha",
+                "ga",
+                "yii2",
+                "yii2-captcha"
+            ],
+            "time": "2016-12-28 08:22:11"
+        },
+        {
             "name": "ga/resque",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liuzexin/GAResque.git",
-                "reference": "3b2bc15cd525bb2aa898af831702c21948fe43f2"
+                "reference": "de02dc5c13adcac936a48ac04d5a776cdc5ab22c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/liuzexin/GAResque/3b2bc15cd525bb2aa898af831702c21948fe43f2.zip",
-                "reference": "3b2bc15cd525bb2aa898af831702c21948fe43f2",
+                "url": "https://packagist.phpcomposer.com/files/liuzexin/GAResque/de02dc5c13adcac936a48ac04d5a776cdc5ab22c.zip",
+                "reference": "de02dc5c13adcac936a48ac04d5a776cdc5ab22c",
                 "shasum": ""
             },
             "require": {
@@ -594,7 +636,7 @@
                 "yii2",
                 "yii2-resque"
             ],
-            "time": "2016-12-07 05:50:51"
+            "time": "2016-12-27 06:09:07"
         },
         {
             "name": "ga/turntable",
@@ -3562,7 +3604,8 @@
         "resque/yii2-resque": 20,
         "ga/turntable": 20,
         "chrisboulton/php-resque": 20,
-        "ga/resque": 20
+        "ga/resque": 20,
+        "ga/captcha": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

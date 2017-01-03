@@ -26,9 +26,10 @@
         "yiisoft/yii2-redis": "^2.0",
         "ga/turntable": "dev-master",
         "guzzlehttp/guzzle": "~6.0",
-        "chrisboulton/php-resque": "@dev",
+        "bower-asset/angular": "^1.6",
+        "chrisboulton/php-resque":"@dev",
         "ga/resque": "dev-master",
-        "bower-asset/angular": "^1.6"
+        "ga/captcha": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
