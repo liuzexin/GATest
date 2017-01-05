@@ -29,7 +29,8 @@
         "bower-asset/angular": "^1.6",
         "chrisboulton/php-resque":"@dev",
         "ga/resque": "dev-master",
-        "ga/captcha": "dev-master"
+        "ga/captcha": "dev-master",
+        "workerman/workerman": "^3.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
