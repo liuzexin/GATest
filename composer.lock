@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a3a7f1345e91c570319af427e9d367c",
-    "content-hash": "5b05d5f188aa4730efcd7aa740673dd1",
+    "hash": "b10950a4d15485bb55958f4a97a5bade",
+    "content-hash": "013fcef5b5e91ed625c497f8feec8b30",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -675,6 +675,48 @@
                 "yii2"
             ],
             "time": "2016-11-29 07:05:52"
+        },
+        {
+            "name": "ga/websocket",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liuzexin/GAWebsocket.git",
+                "reference": "fe390d8bd4ca3eafc878642cc54a1ac8242c0495"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/liuzexin/GAWebsocket/fe390d8bd4ca3eafc878642cc54a1ac8242c0495.zip",
+                "reference": "fe390d8bd4ca3eafc878642cc54a1ac8242c0495",
+                "shasum": ""
+            },
+            "require": {
+                "workerman/workerman": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ga\\resque\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "null"
+            ],
+            "authors": [
+                {
+                    "name": "liuzexin",
+                    "email": "liuzexin_top@163.com"
+                }
+            ],
+            "description": "yii2-websoket component depend on the WorkerMan",
+            "keywords": [
+                "ga",
+                "websocket",
+                "yii2",
+                "yii2-websocket"
+            ],
+            "time": "2017-01-05 07:48:02"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -3651,7 +3693,8 @@
         "ga/turntable": 20,
         "chrisboulton/php-resque": 20,
         "ga/resque": 20,
-        "ga/captcha": 20
+        "ga/captcha": 20,
+        "ga/websocket": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

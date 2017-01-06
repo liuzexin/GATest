@@ -36,21 +36,31 @@ class WebsocketAction extends Action{
 
         $ws_worker = new Worker("websocket://$this->ip:$this->port");
         $ws_worker->count = 2;
+
         $onConnect = $this->onConnect;
         $onMessage = $this->onMessage;
         $onClose = $this->onClose;
 
         $ws_worker->onConnect = function($connection) use($onConnect){
-            $onConnect($connection);
+            if(!empty($onConnect)){
+                return $onConnect($connection);
+            }
         };
 
         $ws_worker->onMessage = function($connection, $data) use ($onMessage){
-            $onMessage($connection, $data);
+            if(!empty($onMessage)){
+                return $onMessage($connection, $data);
+            }
         };
 
         $ws_worker->onClose = function($connection) use ($onClose){
-            $onClose($connection);
+            if(!empty($onClose)){
+                return $onClose($connection);
+            }
         };
+
+        Worker::runAll();
+        return true;
     }
 
     public function afterRun(){

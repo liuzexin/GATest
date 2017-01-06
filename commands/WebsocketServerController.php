@@ -12,6 +12,17 @@ class WebsocketServerController extends Controller{
 
     public $ip = '127.0.0.1';
     public $port = '2346';
+    public function actions(){
+        return [
+          'test-stop' => [
+              'class' => 'app\components\WebsocketAction',
+              'mode' => ['start'],
+              'onMessage' => function($connection, $data){
+                  $connection->send($data);
+              }
+          ]
+        ];
+    }
 
     public function actionStart(){
         $ws_worker = new Worker("websocket://$this->ip:$this->port");
