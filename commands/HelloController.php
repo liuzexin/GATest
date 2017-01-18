@@ -26,7 +26,7 @@ class HelloController extends Controller
      */
     public function actionIndex($message = 'hello world')
     {
-
+        echo ip2long('106.14.37.217');
     }
 
     public function actionQueue(){

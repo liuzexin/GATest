@@ -1,14 +1,8 @@
-﻿<?php
-use app\components\WebsocketWidget;
+﻿
+<?php
+/* @var $this \yii\web\View */
+$this->registerCssFile('@web/css/test.css',[
+    'depends' => 'app\assets\AppAsset'
+]);
 ?>
 
-<?=
-    WebsocketWidget::widget(
-      [
-          'clientOptions' => [
-              'height' => 600,
-              'width' => 400,
-          ]
-      ]
-    );
-?>

@@ -1,0 +1,14 @@
+.test:hover{
+    background-color: blue;
+
+    width: 800px;
+    text-align: center;
+}
+.test{
+    background-color: #00aa00;
+    transition: background-color 2s, width 2s;
+    color: red;
+    display:block;
+    width: 200px;
+    height: 100px;
+}

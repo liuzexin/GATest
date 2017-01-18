@@ -41,9 +41,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//        error_log(var_export(Yii::$app->request),3,'/tmp/error_test.log');
-//        return $this->render('index');
-//        echo mt_rand(-15, 15);
+//
         return $this->render('test');
     }
 

@@ -31,7 +31,8 @@
         "ga/resque": "dev-master",
         "ga/captcha": "dev-master",
         "workerman/workerman": "^3.3",
-        "ga/websocket": "dev-master"
+        "ga/websocket": "dev-master",
+        "yiisoft/yii2-smarty": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
