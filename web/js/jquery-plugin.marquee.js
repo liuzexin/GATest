@@ -52,7 +52,10 @@
                 roundTotal=settings.roundTotal,delayTime=settings.delayTime,
                 minTime=settings.minTime,reduceStepTime=settings.reduceTimeStep,addTimeStep=settings.addTimeStep,
                 totalTime=settings.totalTime,currentTime=totalTime;
-            $(settings.ele[0]).addClass(settings.activeClass);
+            //Fix the bug of the secondary of start, the `desIndex` is the active class.
+            $(sArr[desIndex]).removeClass(settings.activeClass);
+            //At the begin of start, should add class for the first element of `sArr`.
+            $(sArr[0]).addClass(settings.activeClass);
             function callback() {
                 if (currentIndex > sArrCount - 1) {
                     currentIndex = 0;

@@ -16,7 +16,8 @@ $(function(){
            '.6th-img',
            '.7th-img',
            '.8th-img'
-       ]
+       ],
+       desIndex:3
    });
     $('.btn').click(function(){
         $('.btn').marquee('start');
