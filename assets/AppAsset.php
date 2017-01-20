@@ -21,8 +21,13 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
     ];
+    public $js = [
+        'js/jquery-plugin.marquee.js',
+        'js/marquee.js'
+    ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\web\jQueryAsset'
     ];
 }

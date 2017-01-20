@@ -1,0 +1,24 @@
+/**
+ * Created by xin on 2017/1/19.
+ */
+$(function(){
+   $('.btn').marquee({
+       activeClass:'active-img',
+       finishCallback:function(){
+           alert(1);
+       },
+       ele:[
+           '.first-img',
+           '.second-img',
+           '.third-img',
+           '.4th-img',
+           '.5th-img',
+           '.6th-img',
+           '.7th-img',
+           '.8th-img'
+       ]
+   });
+    $('.btn').click(function(){
+        $('.btn').marquee('start');
+    });
+});

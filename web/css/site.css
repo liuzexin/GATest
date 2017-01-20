@@ -113,3 +113,7 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.active-img{
+    box-shadow: #00aa00 0 0 10px 5px;
+}
