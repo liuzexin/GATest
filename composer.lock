@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5e7489750d4fde30da298d65ece220b",
-    "content-hash": "a156b6030c464204cf95425ba9742b11",
+    "hash": "038d09715501e4944dac0495547ddc16",
+    "content-hash": "56e61a30c07f9ef1b4692babebf2a0b9",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -235,6 +235,42 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/marquee-lottery",
+            "version": "0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/liuzexin/MarqueeLottery.git",
+                "reference": "2695bb1ca4cf2825b6c15d2b18ece181395abfe3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/liuzexin/MarqueeLottery/zipball/2695bb1ca4cf2825b6c15d2b18ece181395abfe3",
+                "reference": "2695bb1ca4cf2825b6c15d2b18ece181395abfe3",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "jquery-plugin.marquee-lottery.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "marquee-lottery is a jQuery Plugin.For conviently creating lottery activiry.",
+            "keywords": [
+                "ecosystem:jquery",
+                "jquery-plugin",
+                "lottery",
+                "marquee"
             ]
         },
         {
@@ -970,6 +1006,47 @@
                 "object graph"
             ],
             "time": "2016-09-16 13:37:59"
+        },
+        {
+            "name": "npm-asset/marquee-lottery",
+            "version": "0.1.3",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/marquee-lottery/-/marquee-lottery-0.1.3.tgz",
+                "reference": null,
+                "shasum": "7c685062ee5c16ab78e8c883eff795e0110c4102"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/liuzexin/MarqueeLottery/issues"
+                },
+                "npm-asset-main": "jquery-plugin.marquee-lottery.js",
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "git+https://github.com/liuzexin/MarqueeLottery.git"
+                },
+                "npm-asset-scripts": {
+                    "test": "echo \"Error: no test specified\" && exit 1"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CoderLiu"
+                }
+            ],
+            "description": "marquee-lottery is a jQuery Plugin.For conviently creating lottery activiry.",
+            "homepage": "https://github.com/liuzexin/MarqueeLottery#readme",
+            "keywords": [
+                "ecosystem:jquery",
+                "jquery-plugin",
+                "lottery",
+                "marquee"
+            ]
         },
         {
             "name": "phpdocumentor/reflection-common",

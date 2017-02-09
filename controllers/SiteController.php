@@ -41,7 +41,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-//
+      $a =123123;
         return $this->render('plugin');
     }
 

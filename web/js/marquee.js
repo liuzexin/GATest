@@ -21,5 +21,9 @@ $(function(){
    });
     $('.btn').click(function(){
         $('.btn').marquee('start');
+    }).on('start-marquee-animation', function(){
+        console.log('start');
+    }).on('finish-marquee-animation',function(){
+        console.log('finish');
     });
 });
